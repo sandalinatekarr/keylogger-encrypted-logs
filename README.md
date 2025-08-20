@@ -19,9 +19,7 @@ This is a Proof-of-Concept (PoC) encrypted keylogger built with Python. It captu
 All dependencies are listed in `requirements.txt`.
 
 ---
-
-## ​ Folder Structure
-```plaintext
+## 📂 Folder Structure
 keylogger-encrypted-logs/
 ├── keylogger.py        # Captures keystrokes -> log.txt
 ├── encryptor.py        # Encrypts log.txt -> log.enc (generates key.key)
@@ -30,88 +28,98 @@ keylogger-encrypted-logs/
 ├── server.py           # Flask server to receive encrypted logs
 ├── requirements.txt    # Python dependencies
 └── .gitignore
-✨ Features
+---
 
-✅ Captures keystrokes in real time
+## ⚙️ How It Works
 
-🔐 Encrypts logs with AES (Fernet symmetric key)
+### 1) Keylogging
+`keylogger.py`  
+Records keystrokes and saves them into `log.txt`.  
+Stop logging with **ESC** (or `Ctrl+C`).  
 
-📤 Simulates log exfiltration to a Flask server
+---
 
-🔓 Decryptor included for recovery of logs
+### 2) Encryption
+`encryptor.py`  
+- Generates a secret key (`key.key`)  
+- Encrypts `log.txt` → `log.enc`
 
-🛡️ Modular design: keylogger, encryption, upload, server, decryptor
+---
 
-⚙️ How It Works
+### 3) Server Setup
+`server.py`  
+Runs a Flask server at:  http://localhost:5000/upload
 
-Keylogging
-keylogger.py records keystrokes and saves them into log.txt.
+Encrypted logs uploaded will be saved in the `uploads/` folder.  
 
-Encryption
-encryptor.py generates a Fernet AES key (key.key) and encrypts log.txt into log.enc.
+---
 
-Server Setup
-server.py runs a Flask server at http://localhost:5000/upload that accepts encrypted files.
+### 4) Exfiltration Simulation
+`upload_client.py`  
+Uploads `log.enc` to the Flask server using an HTTP POST request.  
 
-Exfiltration
-upload_client.py simulates sending log.enc to the server using an HTTP POST request.
+---
 
-Decryption
-decryptor.py can be used with key.key to decrypt log.enc back into readable text.
+### 5) Decryption (Optional)
+`decryptor.py`  
+Decrypts `log.enc` using `key.key` back into readable text.  
 
-🚀 Quick Start
+---
+
+## 🚀 Quick Start
+
+### 1. Clone the repository
 git clone https://github.com/sandalinatekarr/keylogger-encrypted-logs.git
 cd keylogger-encrypted-logs
+
+### 2. Install dependencies
 pip install -r requirements.txt
 
-🧭 Step-by-Step Usage
-1) Start the Server
+### 3. Start the Flask server
 python server.py
 
-
-Server will run at:
-
+Server will run at:  
 http://localhost:5000/upload
 
-2) Run the Keylogger
+### 4. Run the keylogger
 python keylogger.py
 
+- Keystrokes will be saved to `log.txt`  
+- Stop logging with **ESC** or `Ctrl+C`
 
-Keystrokes → log.txt
-
-Stop logging with ESC (or Ctrl+C)
-
-3) Encrypt the Logs
+### 5. Encrypt the logs
 python encryptor.py
 
+This will generate:  
+- `log.enc` → Encrypted log file  
+- `key.key` → Secret symmetric key  
 
-Generates:
-
-log.enc — encrypted log
-
-key.key — secret key
-
-4) Upload Encrypted Logs
+### 6. Upload encrypted logs to server
 python upload_client.py
 
+Encrypted files will be saved in the server’s `uploads/` directory.  
 
-Files saved on server under uploads/
-
-5) Decrypt Logs (Optional)
+### 7. (Optional) Decrypt logs
 python decryptor.py log.enc
 
-🔮 Future Enhancements
+Decrypted output will be printed in the terminal or written to a file (based on your configuration).  
 
-🔄 Automatic key rotation for stronger encryption
+---
 
-🕵️ Stealth mode to run in the background without detection
+## 🔮 Future Enhancements
+- 🔄 Automatic key rotation for stronger encryption  
+- 🕵️ Stealth/background execution (simulation only)  
+- ⏱ Timestamped keystrokes & integrity validation  
+- 📂 Centralized log management for multiple clients  
+- 🐳 Dockerized setup for quick deployment  
+- ✉️ TLS/Email-based secure transfer of encrypted logs  
+- 📊 Visualization of decrypted logs  
 
-⏱ Timestamps for keystrokes and integrity validation
+---
 
-📂 Centralized log management for multiple clients
+💡 **Educational Note**: This PoC is intended to help learners understand how encryption, secure data handling, and modular system design work together in practice.  
 
-🐳 Dockerized setup for easier deployment
+---
+👉 This Markdown is ready to paste into your README.md — it will render clean, structured, and professional on GitHub.
 
-✉️ Encrypted email/TLS log transfer instead of plain HTTP
 
-📊 Visualization module to analyze decrypted logs
