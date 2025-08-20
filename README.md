@@ -21,6 +21,14 @@ All dependencies are listed in `requirements.txt`.
 ---
 
 ## 📁 Folder Structure
+keylogger-encrypted-logs/
+├─ keylogger.py # Captures keystrokes -> log.txt
+├─ encryptor.py # Encrypts log.txt -> log.enc (generates key.key)
+├─ decryptor.py # (Optional) Decrypts encrypted logs using key.key
+├─ upload_client.py # Sends log.enc to the server
+├─ server.py # Flask server to receive encrypted logs
+├─ requirements.txt # Python dependencies
+└─ .gitignore
 
 
 
