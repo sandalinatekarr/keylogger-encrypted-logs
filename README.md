@@ -19,7 +19,10 @@ This is a Proof-of-Concept (PoC) encrypted keylogger built with Python. It captu
 All dependencies are listed in `requirements.txt`.
 
 ---
+
 ## 📂 Folder Structure
+
+```plaintext
 keylogger-encrypted-logs/
 ├── keylogger.py        # Captures keystrokes -> log.txt
 ├── encryptor.py        # Encrypts log.txt -> log.enc (generates key.key)
@@ -28,7 +31,9 @@ keylogger-encrypted-logs/
 ├── server.py           # Flask server to receive encrypted logs
 ├── requirements.txt    # Python dependencies
 └── .gitignore
+
 ---
+
 
 ## ⚙️ How It Works
 
