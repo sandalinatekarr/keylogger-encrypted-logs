@@ -69,7 +69,7 @@ pip install -r requirements.txt
 python server.py
 
 Server will run at:  
-http://localhost:5000/upload
+http://localhost:8000/upload
 
 ### 4. Run the keylogger
 python keylogger.py
